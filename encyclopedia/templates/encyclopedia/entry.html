@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    <div>{{ content|safe }}</div>
+    {% if exists %}
+    <a href="{% url 'edit_entry' title %}" class="btn btn-secondary mt-3">Edit Page</a>
+    <a href="{% url 'delete_entry' title %}" class="btn btn-danger mt-3">Delete Page</a>
+{% endif %}
+
+{% endblock %}
+

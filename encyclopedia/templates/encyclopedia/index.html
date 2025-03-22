@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block head %}
+    <style>
+        .fancy-title {
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 2em; /* Adjust the font size as needed */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4 fancy-title">✿ All Pages ✿</h1>
+    <ul class="list-group">
+        {% for entry in entries %}
+            <li class="list-group-item">
+                <a href="{% url 'entry' entry.title %}">{{ entry.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Confirm Delete
+{% endblock %}
+
+{% block body %}
+    <h1>Delete Entry: {{ title }}</h1>
+    <p class="text-warning">Are you sure you want to delete this entry? This action cannot be undone.</p>
+    <form action="{% url 'delete_entry' title %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'entry' title %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

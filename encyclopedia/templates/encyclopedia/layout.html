@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+
+    <style>
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.3in; /* Add space below logo */
+        }
+        .wiki-logo {
+            width: 96px;
+            height: 96px;
+            margin-right: 10px;
+        }
+        .search {
+            margin-bottom: 0.3in; /* Add space between the search bar and the hyperlinks */
+        }
+        .sidebar div {
+            margin-bottom: 10px; /* Space between links */
+        }
+        .wiki-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3em; /* Larger font size for "Wiki" */
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="sidebar col-lg-2 col-md-3">
+            <div class="logo-container">
+                <img src="{% static 'images/wiki_logo.png' %}" alt="Wikipedia Logo" class="wiki-logo">
+                <h2 class="wiki-title">Wiki</h2>
+            </div>
+            <form action="{% url 'search' %}" method="GET">
+                {% csrf_token %}
+                <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+            </form>
+            <div>
+                <a href="{% url 'index' %}">Home</a>
+            </div>
+            <div>
+                <a href="{% url 'new_entry' %}">Create New Page</a>
+            </div>
+            <div>
+                <a href="{% url 'random_page' %}">Random Page</a>
+            </div>
+            {% block nav %}
+            {% endblock %}
+        </div>
+        <div class="main col-lg-10 col-md-9">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
